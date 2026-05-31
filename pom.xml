@@ -21,9 +21,9 @@
         <!-- UTF-8 is our standard encoding for source files -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- Target Java 16 -->
-        <maven.compiler.source>16</maven.compiler.source>
-        <maven.compiler.target>16</maven.compiler.target>
+        <!-- Target Java 21 -->
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <!-- Run tests using java 21 -->
         <maven.compiler.testSource>21</maven.compiler.testSource>
         <maven.compiler.testTarget>21</maven.compiler.testTarget>
@@ -154,6 +154,7 @@
                 <configuration>
                     <junitArtifactName>org.junit.jupiter:junit-jupiter</junitArtifactName>
                     <trimStackTrace>false</trimStackTrace>
+                    <argLine>@{argLine} -XX:+EnableDynamicAgentLoading --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED</argLine>
                 </configuration>
             </plugin>
 
@@ -362,12 +363,6 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.Slimefun.dough</groupId>
-            <artifactId>dough-api</artifactId>
-            <version>cb22e71335</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>io.papermc</groupId>
             <artifactId>paperlib</artifactId>
             <version>1.0.8</version>
@@ -392,6 +387,18 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>5.15.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.18.8</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+            <version>1.18.8</version>
             <scope>test</scope>
         </dependency>
         <dependency>

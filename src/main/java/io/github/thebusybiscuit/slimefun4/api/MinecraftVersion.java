@@ -61,6 +61,18 @@ public enum MinecraftVersion {
      */
     MINECRAFT_1_21(21, 0, "1.21.x"),
 
+     /**
+     * This constant represents Minecraft (Java Edition) Version 1.21.4
+     * ("Tricky Trials Update")
+     */
+    MINECRAFT_1_21_4(21, 4, "1.21.4+"),
+
+     /**
+     * This constant represents Minecraft (Java Edition) Version 1.22
+     * ("1.22 Update")
+     */
+    MINECRAFT_1_22(22, 0, "1.22.x"),
+
     /**
      * This constant represents an exceptional state in which we were unable
      * to identify the Minecraft Version we are using

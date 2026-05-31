@@ -228,6 +228,7 @@ public class Slimefun extends JavaPlugin implements SlimefunAddon {
      */
     @Override
     public void onEnable() {
+        io.github.thebusybiscuit.slimefun4.api.platform.SFPlatform.setProvider(new io.github.thebusybiscuit.slimefun4.api.platform.bukkit.BukkitPlatformProvider());
         setInstance(this);
 
         if (isUnitTest()) {
