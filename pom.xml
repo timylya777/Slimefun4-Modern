@@ -11,7 +11,12 @@
     <!-- from overriding our local test file -->
     <version>4.9-UNOFFICIAL</version>
     <inceptionYear>2013</inceptionYear>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>slimefun-core</module>
+        <module>slimefun-bukkit</module>
+    </modules>
 
     <!-- Project Info -->
     <description>Slimefun is a Paper plugin that simulates a modpack-like atmosphere by adding over 500 new items and recipes to your Minecraft Server.</description>
@@ -101,12 +106,6 @@
     </repositories>
 
     <build>
-        <!-- /src/main/java/ contains all sources (production code) -->
-        <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-
-        <!-- /src/test/java/ contains all unit tests (testing code) -->
-        <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
-
         <!-- The default goal for compiling is "clean package" -->
         <defaultGoal>clean package</defaultGoal>
 
