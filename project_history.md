@@ -98,6 +98,16 @@
 * **Описание**: Монолитная структура проекта была реструктурирована в систему независимых Maven-модулей. `slimefun-bukkit` теперь зависит от чистого `slimefun-core`.
 * **Результат**: Сборка всего реактора проходит без ошибок, все 1788 тестов успешно выполняются.
 
+### 10. Создание и интеграция модуля `slimefun-fabric` (Fabric Integration)
+* **Файлы**:
+  * Создан независимый Gradle-модуль `slimefun-fabric/` с [build.gradle](file:///D:/.code/Slimefun4/slimefun-fabric/build.gradle) и [gradle.properties](file:///D:/.code/Slimefun4/slimefun-fabric/gradle.properties).
+  * Настроен плагин `net.fabricmc.fabric-loom-remap` (Loom 1.16.3) для ремаппинга и сборки под Minecraft 1.21.1.
+  * Добавлена зависимость от платформенно-агностического ядра `slimefun-core` через локальный Maven-репозиторий (`mavenLocal()`).
+  * Настроены метаданные мода [fabric.mod.json](file:///D:/.code/Slimefun4/slimefun-fabric/src/main/resources/fabric.mod.json) и миксины [slimefun.mixins.json](file:///D:/.code/Slimefun4/slimefun-fabric/src/main/resources/slimefun.mixins.json).
+  * Создан базовый класс инициализации мода [SlimefunFabric.java](file:///D:/.code/Slimefun4/slimefun-fabric/src/main/java/io/github/thebusybiscuit/slimefun4/fabric/SlimefunFabric.java).
+* **Описание**: Добавлен нативный Fabric-модуль, использующий общие абстракции ядра `slimefun-core`. Сборка выполняется через Gradle Wrapper, скачивающий все нужные библиотеки Minecraft и Yarn mappings автоматически.
+* **Результат**: Мод успешно компилируется и упаковывается (`BUILD SUCCESSFUL` в Gradle), генерируя готовый jar-файл мода.
+
 ---
 
 ## 📐 Архитектурный план: Переход на мультиплатформенность

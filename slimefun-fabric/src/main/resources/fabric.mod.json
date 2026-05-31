@@ -1,0 +1,32 @@
+{
+	"schemaVersion": 1,
+	"id": "slimefun",
+	"version": "${version}",
+	"name": "Slimefun4",
+	"description": "Slimefun4 ported to Fabric as a native mod.",
+	"authors": [
+		"TheBusyBiscuit",
+		"timylya777"
+	],
+	"contact": {
+		"homepage": "https://github.com/timylya777/Slimefun4-Modern",
+		"sources": "https://github.com/timylya777/Slimefun4-Modern"
+	},
+	"license": "GPL-3.0",
+	"icon": "assets/slimefun/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"io.github.thebusybiscuit.slimefun4.fabric.SlimefunFabric"
+		]
+	},
+	"mixins": [
+		"slimefun.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.9",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
