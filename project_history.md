@@ -21,6 +21,9 @@
 5. **Рефакторинг и портирование кода**
    * *Запрос*: Портировать плагин на последние версии Minecraft после рефакторинга кода, сделать код читаемым и легко модифицируемым.
    * *Статус*: В процессе (внедрён слой абстракции платформы, весь проект успешно компилируется и проходит тесты под JDK 25 / Java 21+).
+6. **Настройка удалённого репозитория на GitHub**
+   * *Запрос*: Создать проект на GitHub и настроить всё для удобной работы с откатами и форками.
+   * *Статус*: Выполнено (настроен личный репозиторий [Slimefun4-Modern](https://github.com/timylya777/Slimefun4-Modern.git)).
 
 ---
 
@@ -68,6 +71,24 @@
   * `BukkitPlayer`, `BukkitItemStack`, `BukkitBlock`, `BukkitWorld`, `BukkitPlatformProvider` — в пакете `io.github.thebusybiscuit.slimefun4.api.platform.bukkit`.
 * **Описание**: Созданы интерфейсы-обёртки, изолирующие основную логику Slimefun от Bukkit API. Это делает код легко расширяемым, более читаемым и подготавливает его к портированию на другие платформы (Fabric / Forge).
 * **Результат**: Новая абстракция полностью внедрена и протестирована, все 1788 тестов успешно пройдена с новым функционалом.
+
+### 7. Синхронизация с GitHub и настройка Remotes (Forks & Upstreams)
+* **Репозиторий**: [https://github.com/timylya777/Slimefun4-Modern.git](https://github.com/timylya777/Slimefun4-Modern.git)
+* **Настройки**:
+  * Локальный репозиторий развёрнут из мелкого (unshallow) до полноценного, загрузив всю историю коммитов официального репозитория Slimefun4 (`git fetch upstream --unshallow`).
+  * Оригинальный репозиторий Slimefun подключен как `upstream` (`https://github.com/Slimefun/Slimefun4.git`).
+  * Ваш личный проект на GitHub подключен как основной `origin`.
+  * Ветка `experimental` со всеми нашими доработками залита на ваш GitHub и настроена для отслеживания (`upstream tracking`).
+
+### 8. Рефакторинг ядра и абстракция инвентаря/GUI (Refactoring Stage 1)
+* **Файлы**:
+  * `SFInventory` — в пакете `io.github.thebusybiscuit.slimefun4.api.platform`.
+  * `BukkitInventory` — в пакете `io.github.thebusybiscuit.slimefun4.api.platform.bukkit`.
+  * Изменения в `PlatformProvider`, `SFPlatform`, `BukkitPlatformProvider` (добавлен метод `wrapInventory`).
+  * Изменения в `PlayerBackpack` (добавлены методы `open(SFPlayer...)` и `getSFInventory()`).
+  * Изменения в `SlimefunItem` (добавлены перегрузки `sendDeprecationWarning`, `canUse`, `getDrops` для `SFPlayer` и `SFItemStack`).
+* **Описание**: Абстрагирован интерфейс инвентаря/GUI для отделения Bukkit UI от ядра плагина, добавлены платформенно-независимые перегрузки в ключевой класс предметов `SlimefunItem`. Это делает предметы готовыми для работы на Fabric/Forge в будущих модулях.
+* **Результат**: Код успешно компилируется на JDK 25 и проходит все 1788 тестов.
 
 ---
 

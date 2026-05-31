@@ -148,6 +148,17 @@ public class PlayerBackpack {
     }
 
     /**
+     * This method returns the platform-independent {@link io.github.thebusybiscuit.slimefun4.api.platform.SFInventory}
+     * of this {@link PlayerBackpack}
+     * 
+     * @return The {@link io.github.thebusybiscuit.slimefun4.api.platform.SFInventory} of this {@link PlayerBackpack}
+     */
+    @Nonnull
+    public io.github.thebusybiscuit.slimefun4.api.platform.SFInventory getSFInventory() {
+        return io.github.thebusybiscuit.slimefun4.api.platform.SFPlatform.wrapInventory(inventory);
+    }
+
+    /**
      * This will open the {@link Inventory} of this backpack to every {@link Player}
      * that was passed onto this method.
      * 
@@ -158,6 +169,24 @@ public class PlayerBackpack {
         Slimefun.runSync(() -> {
             for (Player p : players) {
                 p.openInventory(inventory);
+            }
+        });
+    }
+
+    /**
+     * This will open the {@link Inventory} of this backpack to every {@link io.github.thebusybiscuit.slimefun4.api.platform.SFPlayer}
+     * that was passed onto this method.
+     * 
+     * @param players
+     *            The players who this Backpack will be shown to
+     */
+    public void open(io.github.thebusybiscuit.slimefun4.api.platform.SFPlayer... players) {
+        Slimefun.runSync(() -> {
+            for (io.github.thebusybiscuit.slimefun4.api.platform.SFPlayer p : players) {
+                Object nativeP = p.getNativePlayer();
+                if (nativeP instanceof Player) {
+                    ((Player) nativeP).openInventory(inventory);
+                }
             }
         });
     }

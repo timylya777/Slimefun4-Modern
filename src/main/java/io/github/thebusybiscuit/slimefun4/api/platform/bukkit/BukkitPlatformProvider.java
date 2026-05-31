@@ -47,4 +47,13 @@ public class BukkitPlatformProvider implements PlatformProvider {
         }
         throw new IllegalArgumentException("Expected org.bukkit.World but got: " + nativeWorld.getClass().getName());
     }
+
+    @Nonnull
+    @Override
+    public SFInventory wrapInventory(@Nonnull Object nativeInventory) {
+        if (nativeInventory instanceof org.bukkit.inventory.Inventory) {
+            return new BukkitInventory((org.bukkit.inventory.Inventory) nativeInventory);
+        }
+        throw new IllegalArgumentException("Expected org.bukkit.inventory.Inventory but got: " + nativeInventory.getClass().getName());
+    }
 }

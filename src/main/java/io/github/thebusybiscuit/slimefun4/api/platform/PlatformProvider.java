@@ -18,4 +18,7 @@ public interface PlatformProvider {
 
     @Nonnull
     SFWorld wrapWorld(@Nonnull Object nativeWorld);
+
+    @Nonnull
+    SFInventory wrapInventory(@Nonnull Object nativeInventory);
 }

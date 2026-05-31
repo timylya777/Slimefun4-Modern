@@ -22,6 +22,12 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.permissions.Permission;
 
+import io.github.thebusybiscuit.slimefun4.api.platform.SFBlock;
+import io.github.thebusybiscuit.slimefun4.api.platform.SFItemStack;
+import io.github.thebusybiscuit.slimefun4.api.platform.SFPlatform;
+import io.github.thebusybiscuit.slimefun4.api.platform.SFPlayer;
+import io.github.thebusybiscuit.slimefun4.api.platform.SFWorld;
+
 import io.github.bakedlibs.dough.collections.OptionalMap;
 import io.github.bakedlibs.dough.items.ItemUtils;
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
@@ -957,6 +963,16 @@ public class SlimefunItem implements Placeable {
         return getDrops();
     }
 
+    @Nonnull
+    public Collection<SFItemStack> getDrops(@Nonnull SFPlayer p) {
+        Collection<ItemStack> bukkitDrops = getDrops(p.getNativePlayer() instanceof Player bukkitPlayer ? bukkitPlayer : null);
+        java.util.List<SFItemStack> list = new java.util.ArrayList<>(bukkitDrops.size());
+        for (ItemStack is : bukkitDrops) {
+            list.add(SFPlatform.wrapItemStack(is));
+        }
+        return list;
+    }
+
     /**
      * This will send an info message to the console and signal that this message came
      * from this {@link SlimefunItem}, the message will be sent using the {@link Logger}
@@ -1034,6 +1050,15 @@ public class SlimefunItem implements Placeable {
         Slimefun.getLocalization().sendMessage(player, "messages.deprecated-item");
     }
 
+    public void sendDeprecationWarning(@Nonnull SFPlayer player) {
+        Validate.notNull(player, "The Player must not be null.");
+        if (player.getNativePlayer() instanceof Player p) {
+            sendDeprecationWarning(p);
+        } else {
+            player.sendMessage("messages.deprecated-item");
+        }
+    }
+
     /**
      * This method checks if the given {@link Player} is able to use this {@link SlimefunItem}.
      * A {@link Player} can use it if the following conditions apply:
@@ -1055,6 +1080,14 @@ public class SlimefunItem implements Placeable {
      * 
      * @return Whether this {@link Player} is able to use this {@link SlimefunItem}.
      */
+    public boolean canUse(@Nonnull SFPlayer p, boolean sendMessage) {
+        Validate.notNull(p, "The Player cannot be null!");
+        if (p.getNativePlayer() instanceof Player player) {
+            return canUse(player, sendMessage);
+        }
+        return true;
+    }
+
     public boolean canUse(@Nonnull Player p, boolean sendMessage) {
         Validate.notNull(p, "The Player cannot be null!");
 

@@ -41,4 +41,9 @@ public final class SFPlatform {
     public static SFWorld wrapWorld(@Nonnull Object nativeWorld) {
         return getProvider().wrapWorld(nativeWorld);
     }
+
+    @Nonnull
+    public static SFInventory wrapInventory(@Nonnull Object nativeInventory) {
+        return getProvider().wrapInventory(nativeInventory);
+    }
 }
